@@ -50,7 +50,7 @@ function startCountdown() {
     console.log(delta);
     const countdown = convertMs(delta);
     upgradeRes(countdown);
-    if (delta === 0) {
+    if (delta <= 0.1) {
       clearInterval(timerId);
       return;
     }
