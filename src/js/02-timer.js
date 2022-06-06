@@ -24,6 +24,7 @@ const options = {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     userData = Number(...selectedDates);
+
     dataCompare();
   },
 };
@@ -31,26 +32,23 @@ const options = {
 flatpickr('#datetime-picker', options);
 
 function dataCompare() {
-  console.log('selectedDatesByUser', userData);
   if (userData < currentTime) {
     // alert('Please choose a date in the future');
     Notify.failure('Please choose a date in the future');
+    return;
+  } else {
+    refs.button.toggleAttribute('disabled');
   }
-  refs.button.toggleAttribute('disabled');
 }
 
 refs.button.addEventListener('click', startCountdown);
-// let countdown;
-
-console.log();
 
 function startCountdown() {
   const timerId = setInterval(() => {
     let delta = userData - Date.now();
-    console.log(delta);
     const countdown = convertMs(delta);
     upgradeRes(countdown);
-    if (delta <= 0.1) {
+    if (delta <= 0) {
       clearInterval(timerId);
       return;
     }
@@ -62,7 +60,6 @@ function upgradeRes({ days, hours, minutes, seconds }) {
   refs.minutes.textContent = minutes;
   refs.hours.textContent = hours;
   refs.days.textContent = days;
-  console.log(`${minutes},${seconds}`);
 }
 
 function convertMs(ms) {
