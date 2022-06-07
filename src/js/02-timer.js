@@ -46,12 +46,12 @@ refs.button.addEventListener('click', startCountdown);
 function startCountdown() {
   const timerId = setInterval(() => {
     let delta = userData - Date.now();
-    const countdown = convertMs(delta);
-    upgradeRes(countdown);
     if (delta <= 0) {
       clearInterval(timerId);
       return;
     }
+    const countdown = convertMs(delta);
+    upgradeRes(countdown);
   }, 1000);
 }
 
