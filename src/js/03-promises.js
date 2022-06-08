@@ -19,7 +19,7 @@ function createPromise(position, delay) {
 function onSubmit(e) {
   e.preventDefault();
 
-  for (let i = 0; i <= amount.value; i += 1) {
+  for (let i = 0; i < amount.value; i += 1) {
     const delayValue = +delay.value + +step.value * i;
     createPromise(i + 1, delayValue)
       .then(({ position, delay }) => {
